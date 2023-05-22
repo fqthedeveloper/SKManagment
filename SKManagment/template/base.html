@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="icon" type="icon/jpeg" src="{% static 'images/7.jpeg' %}">
+    <meta charset="UTF-8">
+   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SK.managment & services</title>
+    <!-- box-icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+</head>
+
+<body>
+ <header class="header">
+        <a href="/" class="logo"><img src="{% static 'images/logo1.png' %}" alt="logo" width="50px" height="50px"></a>
+
+        <i class='bx bx-menu' id="menu-icon"></i>
+
+        <nav class="navbar">
+            <a href="/" class="active">Home</a>
+            <a href="/about">About</a>
+            <a href="/services">services</a>
+            <a href="/contact">contact</a>
+        </nav>
+    </header>
+
+{% block content %}
+
+{% endblock %}
+
+<footre class="footre">
+        <div class="footre-text">
+            <p>copyright &copy; 2023 by Yaman | All rights reserved.
+                <br>Contact Me ( 9284175149 )
+                <a href="#"><i class='bx bxl-whatsapp'></i></a>
+            </p>
+
+        </div>
+
+        <div class="foootre-iconTop">
+
+            <a href="#"><i class='bx bx-up-arrow-alt'></i></a>
+
+        </div>
+    </footre>
+<script src="https://unpkg.com/scrollreveal"></script>
+
+
+    <!-- ===============typed js============== -->
+    <script src="https://unpkg.com/typed.js@2.0.15/dist/typed.umd.js"></script>
+
+
+
+    <!-- custom js -->
+    <script src="{% static 'js/index.js' %}"></script>
+
+</body>
+</html>
