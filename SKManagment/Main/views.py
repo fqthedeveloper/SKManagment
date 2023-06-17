@@ -1,26 +1,39 @@
-from django.shortcuts import render, redirect
-from . import forms
+from django.http import JsonResponse
+from .serializers import AdminSerializer, AppointmentSerializer
+from rest_framework import generics
+from django.views.decorators.csrf import csrf_exempt
+from . import models
 
 
-def home(request) :
-    return render(request, 'home.html')
+class AdminList(generics.ListCreateAPIView) :
+    queryset = models.Admin.objects.all()
+    serializer_class = AdminSerializer
+    #permission_classese = [permissions.IsAuthenticated]
 
 
-def contact(request) :
-    msg = ''
-    if request.method == 'POST' :
-        form = forms.AppointmentForm(request.POST)
-        if form.is_valid() :
-            form.save()
-            msg = 'Data Has Been Saved'
-    form = forms.AppointmentForm
-    return render(request, 'contact.html', {'form':form, 'msg':msg})
+class adminDetail(generics.RetrieveUpdateDestroyAPIView) :
+    queryset = models.Admin.objects.all()
+    serializer_class = AdminSerializer
+    #permission_classese = [permissions.IsAuthenticated]
 
 
-def about(request) :
-    return render(request, 'aboutus.html')
+@csrf_exempt
+def admin_login(request) :
+    email = request.POST.get('email')
+    password = request.POST.get('password')
+
+    try :
+        adminData = models.Admin.objects.get(email=email, password=password)
+
+    except models.Admin.DoesNotExist :
+        adminData = None
+
+    if adminData :
+        return JsonResponse({'bool' :True, 'user_id' :adminData.id})
+    else :
+        return JsonResponse({'bool' :False})
 
 
-def services(request) :
-    return render(request, 'services.html')
-
+class Appointment(generics.ListCreateAPIView):
+    queryset = models.Appointment.objects.all()
+    serializer_class = AppointmentSerializer
